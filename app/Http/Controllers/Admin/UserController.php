@@ -90,12 +90,16 @@ class UserController extends Controller {
                 'name',
                 'email',
                 'password',
+                'telephone',
+                'birthday',
                 'locale',
-                'api_access_token',
-                'remember_token'
+                'address',
             ]
         );
 
+        $input['is_activated']  = $request->get('is_activated', 0);
+        $input['gender']        = $request->get('gender', 1);
+        $input['locale']        = $request->get('locale', 'en');
         $model = $this->userRepository->create( $input );
 
         if( empty( $model ) ) {
@@ -175,12 +179,16 @@ class UserController extends Controller {
             [
                 'name',
                 'email',
+                'gender',
+                'telephone',
+                'birthday',
                 'locale',
-                'api_access_token',
-                'remember_token'
+                'address',
             ]
         );
 
+        $input['is_activated']  = $request->get('is_activated', 0);
+        $input['gender']        = $request->get('gender', 1);
         $this->userRepository->update( $model, $input );
 
         if ($request->hasFile('profile_image')) {
