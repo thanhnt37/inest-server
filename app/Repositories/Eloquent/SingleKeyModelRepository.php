@@ -114,17 +114,18 @@ class SingleKeyModelRepository extends BaseRepository implements SingleKeyModelR
         if( \App::environment() != 'testing' ) {
             // crud actions must be execute by repository
             $admin = \Auth::guard('admins')->user();
-
-            Log::create(
-                [
-                    'user_name' => $admin->name,
-                    'email'     => $admin->email,
-                    'table'     => $model->getTable(),
-                    'action'    => Log::TYPE_ACTION_INSERT,
-                    'record_id' => $model->id,
-                    'query'     => $query['query'],
-                ]
-            );
+            if( !empty($admin) ) {
+                Log::create(
+                    [
+                        'user_name' => $admin->name,
+                        'email'     => $admin->email,
+                        'table'     => $model->getTable(),
+                        'action'    => Log::TYPE_ACTION_INSERT,
+                        'record_id' => $model->id,
+                        'query'     => $query['query'],
+                    ]
+                );
+            }
         }
 
         return $model;
@@ -162,17 +163,18 @@ class SingleKeyModelRepository extends BaseRepository implements SingleKeyModelR
                 if( \App::environment() != 'testing' ) {
                     // crud actions must be execute by repository
                     $admin = \Auth::guard('admins')->user();
-
-                    Log::create(
-                        [
-                            'user_name' => $admin->name,
-                            'email'     => $admin->email,
-                            'table'     => $model->getTable(),
-                            'action'    => Log::TYPE_ACTION_UPDATE,
-                            'record_id' => $model->id,
-                            'query'     => $query['query'],
-                        ]
-                    );
+                    if( !empty($admin) ) {
+                        Log::create(
+                            [
+                                'user_name' => $admin->name,
+                                'email'     => $admin->email,
+                                'table'     => $model->getTable(),
+                                'action'    => Log::TYPE_ACTION_UPDATE,
+                                'record_id' => $model->id,
+                                'query'     => $query['query'],
+                            ]
+                        );
+                    }
                 }
             }
         } else {
@@ -205,16 +207,18 @@ class SingleKeyModelRepository extends BaseRepository implements SingleKeyModelR
             // crud actions must be execute by repository
             $admin = \Auth::guard('admins')->user();
 
-            Log::create(
-                [
-                    'user_name' => $admin->name,
-                    'email'     => $admin->email,
-                    'table'     => $model->getTable(),
-                    'action'    => Log::TYPE_ACTION_DELETE,
-                    'record_id' => $model->id,
-                    'query'     => $query['query'],
-                ]
-            );
+            if( !empty($admin) ) {
+                Log::create(
+                    [
+                        'user_name' => $admin->name,
+                        'email'     => $admin->email,
+                        'table'     => $model->getTable(),
+                        'action'    => Log::TYPE_ACTION_DELETE,
+                        'record_id' => $model->id,
+                        'query'     => $query['query'],
+                    ]
+                );
+            }
         }
 
         return $deleted;
