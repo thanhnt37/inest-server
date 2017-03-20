@@ -52,6 +52,20 @@ body {
     text-align: center;
 }
 
+/* Begin: Notification */
+#loadding {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center
+}
+
+.hidden {
+    display: none
+}
+
+/* End: Notification  */
+
 /*----------------------------------------------------------------*/
 
 /* Begin: Switch button */

@@ -6,17 +6,36 @@ use App\Http\Controllers\Controller;
 use App\Repositories\AdminUserNotificationRepositoryInterface;
 use App\Http\Requests\Admin\AdminUserNotificationRequest;
 use App\Http\Requests\PaginationRequest;
+use App\Services\AdminUserServiceInterface;
+use App\Repositories\AdminUserRepositoryInterface;
+use App\Services\AdminUserNotificationServiceInterface;
 
-class AdminUserNotificationController extends Controller {
+class AdminUserNotificationController extends Controller
+{
 
     /** @var \App\Repositories\AdminUserNotificationRepositoryInterface */
     protected $adminUserNotificationRepository;
 
+    /** @var \App\Services\AdminUserNotificationServiceInterface */
+    protected $adminUserNotificationService;
+
+    /** @var \App\Services\AdminUserServiceInterface */
+    protected $adminUserService;
+
+    /** @var \App\Repositories\AdminUserRepositoryInterface */
+    protected $adminUserRepository;
 
     public function __construct(
-        AdminUserNotificationRepositoryInterface $adminUserNotificationRepository
-    ) {
+        AdminUserNotificationRepositoryInterface $adminUserNotificationRepository,
+        AdminUserServiceInterface $adminUserService,
+        AdminUserRepositoryInterface $adminUserRepository,
+        AdminUserNotificationServiceInterface $adminUserNotificationService
+    )
+    {
         $this->adminUserNotificationRepository = $adminUserNotificationRepository;
+        $this->adminUserService = $adminUserService;
+        $this->adminUserRepository = $adminUserRepository;
+        $this->adminUserNotificationService = $adminUserNotificationService;
     }
 
     /**
@@ -26,27 +45,28 @@ class AdminUserNotificationController extends Controller {
      *
      * @return \Response
      */
-    public function index( PaginationRequest $request ) {
-        $paginate[ 'offset' ] = $request->offset();
-        $paginate[ 'limit' ] = $request->limit();
-        $paginate[ 'order' ] = $request->order();
-        $paginate[ 'direction' ] = $request->direction();
-        $paginate[ 'baseUrl' ] = action( 'Admin\AdminUserNotificationController@index' );
+    public function index(PaginationRequest $request)
+    {
+        $paginate['offset']     = $request->offset();
+        $paginate['limit']      = $request->limit();
+        $paginate['order']      = $request->order();
+        $paginate['direction']  = $request->direction();
+        $paginate['baseUrl']    = action('Admin\AdminUserNotificationController@index');
 
         $count = $this->adminUserNotificationRepository->count();
-        $models = $this->adminUserNotificationRepository->get(
-            $paginate[ 'order' ],
-            $paginate[ 'direction' ],
-            $paginate[ 'offset' ],
-            $paginate[ 'limit' ]
+        $notifications = $this->adminUserNotificationRepository->get(
+            $paginate['order'],
+            $paginate['direction'],
+            $paginate['offset'],
+            $paginate['limit']
         );
 
         return view(
             'pages.admin.admin-user-notifications.index',
             [
-                'models'   => $models,
-                'count'    => $count,
-                'paginate' => $paginate,
+                'notifications' => $notifications,
+                'count'         => $count,
+                'paginate'      => $paginate,
             ]
         );
     }
@@ -56,7 +76,8 @@ class AdminUserNotificationController extends Controller {
      *
      * @return \Response
      */
-    public function create() {
+    public function create()
+    {
         return view(
             'pages.admin.admin-user-notifications.edit',
             [
@@ -73,7 +94,8 @@ class AdminUserNotificationController extends Controller {
      *
      * @return \Response
      */
-    public function store( AdminUserNotificationRequest $request ) {
+    public function store(AdminUserNotificationRequest $request)
+    {
         $input = $request->only(
             [
                 'category_type',
@@ -85,20 +107,20 @@ class AdminUserNotificationController extends Controller {
             ]
         );
 
-        $input[ 'sent_at' ] = ( $input[ 'sent_at' ] != "" ) ? $input[ 'sent_at' ] : null;
-        $input[ 'read' ] = $request->get( 'read', 0 );
+        $input['sent_at'] = ($input['sent_at'] != "") ? $input['sent_at'] : null;
+        $input['read']    = $request->get('read', 0);
 
-        $model = $this->adminUserNotificationRepository->create( $input );
+        $model = $this->adminUserNotificationRepository->create($input);
 
-        if( empty( $model ) ) {
+        if (empty($model)) {
             return redirect()
                 ->back()
-                ->withErrors( trans( 'admin.errors.general.save_failed' ) );
+                ->withErrors(trans('admin.errors.general.save_failed'));
         }
 
         return redirect()
-            ->action( 'Admin\AdminUserNotificationController@index' )
-            ->with( 'message-success', trans( 'admin.messages.general.create_success' ) );
+            ->action('Admin\AdminUserNotificationController@index')
+            ->with('message-success', trans('admin.messages.general.create_success'));
     }
 
     /**
@@ -108,10 +130,35 @@ class AdminUserNotificationController extends Controller {
      *
      * @return \Response
      */
-    public function show( $id ) {
-        $model = $this->adminUserNotificationRepository->find( $id );
-        if( empty( $model ) ) {
-            abort( 404 );
+    public function show($id)
+    {
+        $adminUser             = $this->adminUserService->getUser();
+        $adminUserNotification = $this->adminUserNotificationRepository->find($id);
+        if (empty($adminUserNotification)) {
+            \App::abort(404);
+        }
+
+        $this->adminUserNotificationRepository->update($adminUserNotification, ['read' => 1]);
+
+        if ($adminUser['last_notification_id'] < $id) {
+            $this->adminUserRepository->update($adminUser, ['last_notification_id' => $id]);
+        }
+
+        return redirect()->action('Admin\AdminUserNotificationController@edit', $id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return \Response
+     */
+    public function edit($id)
+    {
+        $model = $this->adminUserNotificationRepository->find($id);
+        if (empty($model)) {
+            abort(404);
         }
 
         return view(
@@ -124,17 +171,6 @@ class AdminUserNotificationController extends Controller {
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Response
-     */
-    public function edit( $id ) {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  int $id
@@ -142,11 +178,12 @@ class AdminUserNotificationController extends Controller {
      *
      * @return \Response
      */
-    public function update( $id, AdminUserNotificationRequest $request ) {
+    public function update($id, AdminUserNotificationRequest $request)
+    {
         /** @var \App\Models\AdminUserNotification $model */
-        $model = $this->adminUserNotificationRepository->find( $id );
-        if( empty( $model ) ) {
-            abort( 404 );
+        $model = $this->adminUserNotificationRepository->find($id);
+        if (empty($model)) {
+            abort(404);
         }
         $input = $request->only(
             [
@@ -159,14 +196,14 @@ class AdminUserNotificationController extends Controller {
             ]
         );
 
-        $input[ 'sent_at' ] = ( $input[ 'sent_at' ] != "" ) ? $input[ 'sent_at' ] : null;
-        $input[ 'read' ] = $request->get( 'read', 0 );
+        $input['sent_at'] = ($input['sent_at'] != "") ? $input['sent_at'] : null;
+        $input['read'] = $request->get('read', 0);
 
-        $this->adminUserNotificationRepository->update( $model, $input );
+        $this->adminUserNotificationRepository->update($model, $input);
 
         return redirect()
-            ->action( 'Admin\AdminUserNotificationController@show', [$id] )
-            ->with( 'message-success', trans( 'admin.messages.general.update_success' ) );
+            ->action('Admin\AdminUserNotificationController@show', [$id])
+            ->with('message-success', trans('admin.messages.general.update_success'));
     }
 
     /**
@@ -176,17 +213,25 @@ class AdminUserNotificationController extends Controller {
      *
      * @return \Response
      */
-    public function destroy( $id ) {
+    public function destroy($id)
+    {
         /** @var \App\Models\AdminUserNotification $model */
-        $model = $this->adminUserNotificationRepository->find( $id );
-        if( empty( $model ) ) {
-            abort( 404 );
+        $model = $this->adminUserNotificationRepository->find($id);
+        if (empty($model)) {
+            abort(404);
         }
-        $this->adminUserNotificationRepository->delete( $model );
+        $this->adminUserNotificationRepository->delete($model);
 
         return redirect()
-            ->action( 'Admin\AdminUserNotificationController@index' )
-            ->with( 'message-success', trans( 'admin.messages.general.delete_success' ) );
+            ->action('Admin\AdminUserNotificationController@index')
+            ->with('message-success', trans('admin.messages.general.delete_success'));
     }
 
+    public function loadNotification($offset)
+    {
+        $user = $this->adminUserService->getUser();
+        $notifications = $this->adminUserNotificationService->getNotifications($user, $offset, 10);
+
+        return $notifications;
+    }
 }
