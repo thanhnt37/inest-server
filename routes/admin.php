@@ -34,6 +34,8 @@
 
         \Route::resource('user-notifications', 'Admin\UserNotificationController');
         \Route::resource('admin-user-notifications', 'Admin\AdminUserNotificationController');
+        \Route::get('load-notification/{offset}', 'Admin\AdminUserNotificationController@loadNotification');
+
         \Route::resource('images', 'Admin\ImageController');
         \Route::resource('logs', 'Admin\LogController');
         /* NEW ADMIN RESOURCE ROUTE */

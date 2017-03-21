@@ -74,7 +74,7 @@ return [
 
     'timezone' => 'UTC',
 
-    'default_presentation_timezone' => 'Asia/Tokyo',
+    'default_presentation_timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
     |--------------------------------------------------------------------------
@@ -87,7 +87,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'gb',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'gb',
 
     /*
     |--------------------------------------------------------------------------
