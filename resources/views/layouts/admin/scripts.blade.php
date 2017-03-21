@@ -15,6 +15,23 @@
         'csrfToken': "{!! csrf_token() !!}"
     };
 
+    $('#language-switcher').flagStrap({
+        countries: {
+            "GB": "English",
+            "VN": "Tiếng Việt"
+        },
+        buttonSize: "btn-sm",
+        buttonType: "btn-primary",
+        labelMargin: "10px",
+        scrollable: false,
+        placeholder: false,
+        scrollableHeight: "350px",
+        onSelect: function (value, element) {
+            url = window.location.href.split('?')[0] + '?locale=' + value.toLowerCase();
+            window.location.href = url;
+        }
+    });
+
     @if(Session::has('message-success'))
         toastr["success"]("{{ Session::get('message-success') }}", "Successfully !!!");
     @endif

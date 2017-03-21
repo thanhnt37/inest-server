@@ -63,8 +63,11 @@ body {
 .hidden {
     display: none
 }
-
 /* End: Notification  */
+
+#language-switcher .flagstrap-icon {
+    vertical-align: middle;
+}
 
 /*----------------------------------------------------------------*/
 

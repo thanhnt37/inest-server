@@ -103,6 +103,10 @@
                         </li>
                     </ul>
                 </li>
+
+                <li>
+                    <div id="language-switcher" class="flagstrap" data-selected-country="{{strtoupper(\App::getLocale())}}" style="margin: 10px 10px 0 0;"></div>
+                </li>
             </ul>
         </div>
     </nav>
