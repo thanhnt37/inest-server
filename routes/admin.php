@@ -47,24 +47,7 @@
 
         \Route::post('signout', 'Admin\AuthController@postSignOut');
 
-//        \Route::resource('users', 'Admin\UserController');
-//        \Route::resource('admin-users', 'Admin\AdminUserController');
-//        \Route::resource('site-configurations', 'Admin\SiteConfigurationController');
-
-//        \Route::resource('articles', 'Admin\ArticleController');
-//        \Route::post('articles/preview', 'Admin\ArticleController@preview');
-//        \Route::get('articles/images', 'Admin\ArticleController@getImages');
-//        \Route::post('articles/images', 'Admin\ArticleController@postImage');
-//        \Route::delete('articles/images', 'Admin\ArticleController@deleteImage');
-
-//        \Route::resource('images', 'Admin\ImageController');
-//        \Route::delete('images/delete', 'Admin\ImageController@deleteByUrl');
-
-//        \Route::resource('user-notifications', 'Admin\UserNotificationController');
-//        \Route::resource('admin-user-notifications', 'Admin\AdminUserNotificationController');
-
-//        \Route::resource('images', 'Admin\ImageController');
-//        \Route::resource('logs', 'Admin\LogController');
         /* NEW ADMIN RESOURCE ROUTE */
+
     });
 });
