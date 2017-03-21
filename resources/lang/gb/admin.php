@@ -2,10 +2,27 @@
 
 return [
     'menu'     => [
-        'dashboard'          => 'Dashboard',
-        'admin_users'        => 'Admin Users',
-        'users'              => 'Users',
-        'site-configuration' => 'Site Configuration',
+        'dashboard'                => 'Dashboard',
+        'admin_users'              => 'Admin Users',
+        'users'                    => 'Users',
+        'admin_user_notifications' => 'AdminUserNotifications',
+        'user_notifications'       => 'UserNotifications',
+        'site_configuration'       => 'Site Configuration',
+        'log_system'               => 'Logs System',
+        'images'                   => 'Images',
+        'articles'                 => 'Articles',
+    ],
+    'breadcrumb' => [
+        'dashboard'                => 'Dashboard',
+        'admin_users'              => 'Admin Users',
+        'users'                    => 'Users',
+        'admin_user_notifications' => 'AdminUserNotifications',
+        'user_notifications'       => 'UserNotifications',
+        'site_configuration'       => 'Site Configuration',
+        'log_system'               => 'Logs',
+        'images'                   => 'Images',
+        'articles'                 => 'Articles',
+        'create_new'               => 'Create New',
     ],
     'messages' => [
         'general' => [
@@ -156,8 +173,12 @@ return [
             'columns' => [
                 'name'             => 'Name',
                 'email'            => 'Email',
+                'password'         => 'Password',
+                're_password'      => 'Confirm Password',
+                'role'             => 'Role',
                 'locale'           => 'Locale',
                 'profile_image_id' => 'Avatar',
+                'permissions'      => 'Permissions',
             ],
         ],
         'users'                    => [
@@ -193,6 +214,6 @@ return [
     ],
     'roles'    => [
         'super_user' => 'Super User',
-        'site_admin' => 'Site Administrator',
+        'admin'      => 'Administrator',
     ],
 ];
