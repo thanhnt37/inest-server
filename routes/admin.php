@@ -12,32 +12,59 @@
     });
 
     \Route::group(['middleware' => ['admin.auth']], function () {
-        \Route::post('signout', 'Admin\AuthController@postSignOut');
+
+        \Route::group(['middleware' => ['admin.has_role.super_user']], function () {
+            \Route::resource('users', 'Admin\UserController');
+            \Route::resource('user-notifications', 'Admin\UserNotificationController');
+
+            \Route::resource('site-configurations', 'Admin\SiteConfigurationController');
+
+            \Route::resource('articles', 'Admin\ArticleController');
+            \Route::post('articles/preview', 'Admin\ArticleController@preview');
+            \Route::get('articles/images', 'Admin\ArticleController@getImages');
+            \Route::post('articles/images', 'Admin\ArticleController@postImage');
+            \Route::delete('articles/images', 'Admin\ArticleController@deleteImage');
+
+            \Route::delete('images/delete', 'Admin\ImageController@deleteByUrl');
+            \Route::resource('images', 'Admin\ImageController');
+
+            \Route::resource('logs', 'Admin\LogController');
+
+        });
+
+        \Route::group(['middleware' => ['admin.has_role.admin']], function () {
+            \Route::resource('admin-users', 'Admin\AdminUserController');
+            \Route::resource('admin-user-notifications', 'Admin\AdminUserNotificationController');
+            
+            \Route::get('load-notification/{offset}', 'Admin\AdminUserNotificationController@loadNotification');
+        });
+
         \Route::get('/', 'Admin\IndexController@index');
 
         \Route::get('/me', 'Admin\MeController@index');
         \Route::put('/me', 'Admin\MeController@update');
         \Route::get('/me/notifications', 'Admin\MeController@notifications');
 
-        \Route::resource('users', 'Admin\UserController');
-        \Route::resource('admin-users', 'Admin\AdminUserController');
-        \Route::resource('site-configurations', 'Admin\SiteConfigurationController');
+        \Route::post('signout', 'Admin\AuthController@postSignOut');
 
-        \Route::resource('articles', 'Admin\ArticleController');
-        \Route::post('articles/preview', 'Admin\ArticleController@preview');
-        \Route::get('articles/images', 'Admin\ArticleController@getImages');
-        \Route::post('articles/images', 'Admin\ArticleController@postImage');
-        \Route::delete('articles/images', 'Admin\ArticleController@deleteImage');
+//        \Route::resource('users', 'Admin\UserController');
+//        \Route::resource('admin-users', 'Admin\AdminUserController');
+//        \Route::resource('site-configurations', 'Admin\SiteConfigurationController');
 
-        \Route::resource('images', 'Admin\ImageController');
-        \Route::delete('images/delete', 'Admin\ImageController@deleteByUrl');
+//        \Route::resource('articles', 'Admin\ArticleController');
+//        \Route::post('articles/preview', 'Admin\ArticleController@preview');
+//        \Route::get('articles/images', 'Admin\ArticleController@getImages');
+//        \Route::post('articles/images', 'Admin\ArticleController@postImage');
+//        \Route::delete('articles/images', 'Admin\ArticleController@deleteImage');
 
-        \Route::resource('user-notifications', 'Admin\UserNotificationController');
-        \Route::resource('admin-user-notifications', 'Admin\AdminUserNotificationController');
-        \Route::get('load-notification/{offset}', 'Admin\AdminUserNotificationController@loadNotification');
+//        \Route::resource('images', 'Admin\ImageController');
+//        \Route::delete('images/delete', 'Admin\ImageController@deleteByUrl');
 
-        \Route::resource('images', 'Admin\ImageController');
-        \Route::resource('logs', 'Admin\LogController');
+//        \Route::resource('user-notifications', 'Admin\UserNotificationController');
+//        \Route::resource('admin-user-notifications', 'Admin\AdminUserNotificationController');
+
+//        \Route::resource('images', 'Admin\ImageController');
+//        \Route::resource('logs', 'Admin\LogController');
         /* NEW ADMIN RESOURCE ROUTE */
     });
 });
