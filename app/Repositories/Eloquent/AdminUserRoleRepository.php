@@ -40,10 +40,12 @@ class AdminUserRoleRepository extends SingleKeyModelRepository implements AdminU
     {
         $this->deleteByAdminUserId($adminUserId);
         foreach ($roles as $role) {
-            $this->create([
-                'admin_user_id' => $adminUserId,
-                'role' => $role,
-            ]);
+            $this->create(
+                [
+                    'admin_user_id' => $adminUserId,
+                    'role'          => $role,
+                ]
+            );
         }
     }
 }
