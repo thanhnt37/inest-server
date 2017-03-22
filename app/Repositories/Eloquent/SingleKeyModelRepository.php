@@ -106,7 +106,8 @@ class SingleKeyModelRepository extends BaseRepository implements SingleKeyModelR
         $model = $this->getBlankModel();
         $model = $this->update($model, $input);
 
-        $query = \DB::getQueryLog()[0];
+        $queries = \DB::getQueryLog();
+        $query = $queries[count($queries) - 1];
         foreach( $query['bindings'] as $key => $value ) {
             $query['query'] = preg_replace("/\?/", "`$value`", $query['query'], 1);
         }
@@ -198,7 +199,8 @@ class SingleKeyModelRepository extends BaseRepository implements SingleKeyModelR
         \DB::connection()->enableQueryLog();
         $deleted = $model->delete();
 
-        $query = \DB::getQueryLog()[0];
+        $queries = \DB::getQueryLog();
+        $query = $queries[count($queries) - 1];
         foreach( $query['bindings'] as $key => $value ) {
             $query['query'] = preg_replace("/\?/", "`$value`", $query['query'], 1);
         }
