@@ -78,6 +78,12 @@ class User extends AuthenticatableBase
 
     protected $dates = ['deleted_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+        parent::observe(new \App\Observers\UserObserver);
+    }
+
     public function profileImage()
     {
         return $this->belongsTo(\App\Models\Image::class, 'profile_image_id', 'id');

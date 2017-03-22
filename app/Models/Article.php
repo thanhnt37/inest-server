@@ -81,6 +81,12 @@ class Article extends Base
 
     protected $dates = ['publish_started_at', 'publish_ended_at', 'deleted_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+        parent::observe(new \App\Observers\ArticleObserver);
+    }
+
     // Relations
     public function coverImage()
     {
