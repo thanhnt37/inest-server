@@ -189,7 +189,7 @@ class UserController extends Controller {
 
         $input['is_activated']  = $request->get('is_activated', 0);
         $input['gender']        = $request->get('gender', 1);
-        $this->userRepository->update( $model, $input );
+        $model = $this->userRepository->update( $model, $input );
 
         if ($request->hasFile('profile_image')) {
             $file       = $request->file('profile_image');

@@ -212,7 +212,7 @@ class AdminUserController extends Controller
             ]
         );
 
-        $this->adminUserRepository->update($adminUser, $input);
+        $adminUser = $this->adminUserRepository->update($adminUser, $input);
         $this->adminUserRoleRepository->setAdminUserRoles($id, $request->input('role', []));
 
         if ($request->hasFile('profile_image')) {
