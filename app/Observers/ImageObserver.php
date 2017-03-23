@@ -7,16 +7,16 @@ class ImageObserver extends BaseObserver
 
     public function created($model)
     {
-        \Redis::hsetnx($this->generateCacheKey('hash_' . $this->cachePrefix), $model->id, $model);
+        \Redis::hsetnx(\CacheHelper::generateCacheKey('hash_' . $this->cachePrefix), $model->id, $model);
     }
 
     public function updated($model)
     {
-        \Redis::hset($this->generateCacheKey('hash_' . $this->cachePrefix), $model->id, $model);
+        \Redis::hset(\CacheHelper::generateCacheKey('hash_' . $this->cachePrefix), $model->id, $model);
     }
 
     public function deleted($model)
     {
-        \Redis::hdel($this->generateCacheKey('hash_' . $this->cachePrefix), $model->id);
+        \Redis::hdel(\CacheHelper::generateCacheKey('hash_' . $this->cachePrefix), $model->id);
     }
 }

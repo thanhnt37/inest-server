@@ -105,7 +105,7 @@ class User extends AuthenticatableBase
             'birthday'  => $this->birthday,
             'locale'    => $this->locale,
             'address'   => $this->address,
-            'avatar'    => !empty($this->profileImage) ? $this->profileImage->url : \URLHelper::asset('img/user_avatar.png', 'common'),
+            'avatar'    => !empty($this->present()->profileImage()) ? $this->present()->profileImage()->url : \URLHelper::asset('img/user_avatar.png', 'common'),
         ];
     }
 }

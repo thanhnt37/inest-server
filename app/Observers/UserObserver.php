@@ -7,16 +7,16 @@ class UserObserver extends BaseObserver
 
     public function created($user)
     {
-        \Redis::hsetnx($this->generateCacheKey('hash_' . $this->cachePrefix), $user->id, $user);
+        \Redis::hsetnx(\CacheHelper::generateCacheKey('hash_' . $this->cachePrefix), $user->id, $user);
     }
 
     public function updated($user)
     {
-        \Redis::hset($this->generateCacheKey('hash_' . $this->cachePrefix), $user->id, $user);
+        \Redis::hset(\CacheHelper::generateCacheKey('hash_' . $this->cachePrefix), $user->id, $user);
     }
 
     public function deleted($user)
     {
-        \Redis::hdel($this->generateCacheKey('hash_' . $this->cachePrefix), $user->id);
+        \Redis::hdel(\CacheHelper::generateCacheKey('hash_' . $this->cachePrefix), $user->id);
     }
 }
