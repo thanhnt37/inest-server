@@ -55,6 +55,11 @@ class HelperBindServiceProvider extends ServiceProvider {
             \App\Helpers\Production\RedirectHelper::class
         );
 
+        $this->app->singleton(
+            \App\Helpers\CacheHelperInterface::class,
+            \App\Helpers\Production\CacheHelper::class
+        );
+
         /* NEW BINDING */
     }
 }

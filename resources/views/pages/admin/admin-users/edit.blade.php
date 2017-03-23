@@ -68,8 +68,8 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="form-group text-center">
-                            @if( !empty($adminUser->profileImage) )
-                                <img id="profile-image-preview" style="max-width: 500px; width: 100%;" src="{!! $adminUser->profileImage->getThumbnailUrl(480, 300) !!}" alt="" class="margin"/>
+                            @if( !empty($adminUser->present()->profileImage()) )
+                                <img id="profile-image-preview" style="max-width: 500px; width: 100%;" src="{!! $adminUser->present()->profileImage()->getThumbnailUrl(480, 300) !!}" alt="" class="margin"/>
                             @else
                                 <img id="profile-image-preview" style="max-width: 500px; width: 100%;" src="{!! \URLHelper::asset('img/no_image.jpg', 'common') !!}" alt="" class="margin"/>
                             @endif

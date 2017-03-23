@@ -224,7 +224,7 @@ class ArticleController extends Controller
             $input[ 'publish_ended_at' ] = $request->get( 'publish_ended_at' );
         }
 
-        $this->articleRepository->update( $article, $input );
+        $article = $this->articleRepository->update( $article, $input );
 
         if( $request->hasFile( 'cover_image' ) ) {
             $currentImage = $article->coverImage;

@@ -78,6 +78,12 @@ class User extends AuthenticatableBase
 
     protected $dates = ['deleted_at'];
 
+    public static function boot()
+    {
+        parent::boot();
+        parent::observe(new \App\Observers\UserObserver);
+    }
+
     public function profileImage()
     {
         return $this->belongsTo(\App\Models\Image::class, 'profile_image_id', 'id');
@@ -99,7 +105,7 @@ class User extends AuthenticatableBase
             'birthday'  => $this->birthday,
             'locale'    => $this->locale,
             'address'   => $this->address,
-            'avatar'    => !empty($this->profileImage) ? $this->profileImage->url : \URLHelper::asset('img/user_avatar.png', 'common'),
+            'avatar'    => !empty($this->present()->profileImage()) ? $this->present()->profileImage()->url : \URLHelper::asset('img/user_avatar.png', 'common'),
         ];
     }
 }
