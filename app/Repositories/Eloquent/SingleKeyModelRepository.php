@@ -18,18 +18,19 @@ class SingleKeyModelRepository extends BaseRepository implements SingleKeyModelR
     public function find($id)
     {
         $modelClass = $this->getModelClassName();
-        if ($this->cacheEnabled) {
-            $key = $this->getCacheKey([$id]);
-            \Log::info("Cache Check $key");
-            $data = \Cache::remember($key, $this->cacheLifeTime, function () use ($id, $modelClass) {
-                $modelClass = $this->getModelClassName();
+        $cacheKey   = strtolower(explode('\\', $modelClass)[2]) . 's';
+        $cached = \Redis::hget(\CacheHelper::generateCacheKey('hash_' . $cacheKey), $id);
+        if( $cached ) {
+            $object = new $modelClass(json_decode($cached, true));
+            $object['attributes'] = json_decode($cached, true);
+            $object['original']   = json_decode($cached, true);
+            $object['exists']     = true;
 
-                return $modelClass::find($id);
-            });
-
-            return $data;
+            return $object;
         } else {
-            return $modelClass::find($id);
+            $object = $modelClass::find($id);
+            \Redis::hsetnx(\CacheHelper::generateCacheKey('hash_' . $cacheKey), $id, $object);
+            return $object;
         }
     }
 
@@ -138,13 +139,6 @@ class SingleKeyModelRepository extends BaseRepository implements SingleKeyModelR
             if (array_key_exists($column, $input)) {
                 $model->$column = array_get($input, $column);
             }
-        }
-
-        if ($this->cacheEnabled) {
-            $primaryKey = $this->getPrimaryKey();
-            $key = $this->getCacheKey([$model->$primaryKey]);
-            \Log::info("Cache Remove $key");
-            \Cache::forget($key);
         }
 
         if( isset($model->id) && $model->id ) {
