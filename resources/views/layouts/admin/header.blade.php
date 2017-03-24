@@ -63,33 +63,18 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{!! \URLHelper::asset('libs/adminlte/img/user2-160x160.jpg','admin') !!}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="user-image" alt="User Image">
+                        <span class="hidden-xs">@if($authUser->name){{ $authUser->name }} @else {{ $authUser->email }} @endif</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{!! \URLHelper::asset('libs/adminlte/img/user2-160x160.jpg','admin') !!}" class="img-circle" alt="User Image">
+                            <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="img-circle" alt="User Image">
 
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                @if($authUser->name) {{ $authUser->name }} @else {{ $authUser->email }} @endif
+                                <small>@if( count($authUser->roles) ) {{ $authUser->roles[0]->getRoleName() }} @endif</small>
                             </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
-                            </div>
-                            <!-- /.row -->
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
