@@ -110,13 +110,16 @@ class UserController extends Controller {
 
         if ($request->hasFile('profile_image')) {
             $file       = $request->file('profile_image');
-            $mediaType  = $file->getClientMimeType();
-            $path       = $file->getPathname();
-            $image      = $this->fileUploadService->upload('user-profile-image', $path, $mediaType, [
-                'entityType' => 'user-profile-image',
-                'entityId'   => $model->id,
-                'title'      => $request->input('name', ''),
-            ]);
+
+            $image = $this->fileUploadService->upload(
+                'user_profile_image',
+                $file,
+                [
+                    'entity_type' => 'user_profile_image',
+                    'entity_id'   => $model->id,
+                    'title'       => $request->input('name', ''),
+                ]
+            );
 
             if (!empty($image)) {
                 $this->userRepository->update($model, ['profile_image_id' => $image->id]);
@@ -193,22 +196,24 @@ class UserController extends Controller {
 
         if ($request->hasFile('profile_image')) {
             $file       = $request->file('profile_image');
-            $mediaType  = $file->getClientMimeType();
-            $path       = $file->getPathname();
-            $image      = $this->fileUploadService->upload('user-profile-image', $path, $mediaType, [
-                'entityType' => 'user-profile-image',
-                'entityId'   => $model->id,
-                'title'      => $request->input('name', ''),
-            ]);
 
-            if (!empty($image)) {
+            $newImage = $this->fileUploadService->upload(
+                'user_profile_image',
+                $file,
+                [
+                    'entity_type' => 'user_profile_image',
+                    'entity_id'   => $model->id,
+                    'title'       => $request->input('name', ''),
+                ]
+            );
+
+            if (!empty($newImage)) {
                 $oldImage = $model->coverImage;
                 if (!empty($oldImage)) {
                     $this->fileUploadService->delete($oldImage);
-                    $this->imageRepository->delete($oldImage);
                 }
 
-                $this->userRepository->update($model, [ 'profile_image_id' => $image->id ]);
+                $this->userRepository->update($model, [ 'profile_image_id' => $newImage->id ]);
             }
         }
 
