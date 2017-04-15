@@ -21,8 +21,6 @@ class CreatedevicesTable extends Migration
             $table->string('platform');
             $table->string('os_version');
 
-            $table->bigInteger('application_id');
-
             $table->boolean('lbh')->default(false);
             $table->string('mode_player')->default('xcd');
             $table->boolean('bg')->default(false);

@@ -54,6 +54,11 @@ class Application extends Base
         return $this->belongsTo(\App\Models\Message::class, 'message_id', 'id');
     }
 
+    public function devices()
+    {
+        return $this->belongsToMany('App\Models\Device', ApplicationDevice::getTableName(), 'application_id', 'device_id');
+    }
+
 
 
     // Utility Functions

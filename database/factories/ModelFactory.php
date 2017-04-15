@@ -173,16 +173,15 @@ $factory->define(App\Models\Message::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Device::class, function (Faker\Generator $faker) {
     return [
-        'device_id'      => $faker->creditCardNumber(),
-        'name'           => $faker->name,
-        'model'          => $faker->word,
-        'platform'       => $faker->randomKey(['ios', 'android']),
-        'os_version'     => $faker->numberBetween(1, 10),
-        'application_id' => 0,
-        'lbh'            => $faker->boolean,
-        'mode_player'    => $faker->randomKey(['xcd', 'yt']),
-        'bg'             => $faker->boolean,
-        'ads_name'       => $faker->name,
+        'device_id'   => $faker->creditCardNumber(),
+        'name'        => $faker->name,
+        'model'       => $faker->word,
+        'platform'    => $faker->randomKey(['ios', 'android']),
+        'os_version'  => $faker->numberBetween(1, 10),
+        'lbh'         => $faker->boolean,
+        'mode_player' => $faker->randomKey(['xcd', 'yt']),
+        'bg'          => $faker->boolean,
+        'ads_name'    => $faker->name,
     ];
 });
 
@@ -195,6 +194,13 @@ $factory->define(App\Models\Advertisement::class, function (Faker\Generator $fak
         'description' => $faker->sentences(4, true),
         'image_url'   => $faker->imageUrl(),
         'video_url'   => $faker->url,
+    ];
+});
+
+$factory->define(App\Models\ApplicationDevice::class, function (Faker\Generator $faker) {
+    return [
+        'application_id' => 0,
+        'device_id'      => 0
     ];
 });
 

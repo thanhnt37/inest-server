@@ -25,7 +25,6 @@ class Device extends Base
         'model',
         'platform',
         'os_version',
-        'application_id',
         'lbh',
         'mode_player',
         'bg',
@@ -50,9 +49,9 @@ class Device extends Base
     }
 
     // Relations
-    public function application()
+    public function applications()
     {
-        return $this->belongsTo(\App\Models\Application::class, 'application_id', 'id');
+        return $this->belongsToMany('App\Models\Application', ApplicationDevice::getTableName(), 'device_id', 'application_id');
     }
 
 
@@ -71,7 +70,6 @@ class Device extends Base
             'model'          => $this->model,
             'platform'       => $this->platform,
             'os_version'     => $this->os_version,
-            'application_id' => $this->application_id,
             'lbh'            => $this->lbh,
             'mode_player'    => $this->mode_player,
             'bg'             => $this->bg,
