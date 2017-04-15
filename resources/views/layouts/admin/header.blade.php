@@ -63,13 +63,13 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="user-image" alt="User Image">
+                        <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->present()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="user-image" alt="User Image">
                         <span class="hidden-xs">@if($authUser->name){{ $authUser->name }} @else {{ $authUser->email }} @endif</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="img-circle" alt="User Image">
+                            <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->present()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="img-circle" alt="User Image">
 
                             <p>
                                 @if($authUser->name) {{ $authUser->name }} @else {{ $authUser->email }} @endif

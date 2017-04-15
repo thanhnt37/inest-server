@@ -69,7 +69,7 @@
                     <div class="col-lg-5">
                         <div class="form-group text-center">
                             @if( !empty($adminUser->present()->profileImage()) )
-                                <img id="profile-image-preview" style="max-width: 500px; width: 100%;" src="{!! $adminUser->present()->profileImage()->getThumbnailUrl(480, 300) !!}" alt="" class="margin"/>
+                                <img id="profile-image-preview" style="max-width: 500px; width: 100%;" src="{!! $adminUser->present()->profileImage()->present()->url !!}" alt="" class="margin"/>
                             @else
                                 <img id="profile-image-preview" style="max-width: 500px; width: 100%;" src="{!! \URLHelper::asset('img/no_image.jpg', 'common') !!}" alt="" class="margin"/>
                             @endif
@@ -105,7 +105,7 @@
                                     <label for="password">@lang('admin.pages.users.columns.password')</label>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="password" name="password" required @if(!$isNew) disabled @endif value="{{ old('password') ? old('password') : $adminUser->password }}">
+                                    <input type="password" class="form-control" id="password" name="password" required @if(!$isNew) disabled @endif value="{{ old('password') ? old('password') : $adminUser->password }}">
                                 </td>
                             </tr>
 
