@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="img-circle" alt="User Image">
+                <img src="@if(!empty($authUser->present()->profileImage())) {{ $authUser->present()->profileImage()->present()->url }} @else {!! \URLHelper::asset('img/user_avatar.png', 'common') !!} @endif" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>@if($authUser->name){{ $authUser->name }} @else {{ $authUser->email }} @endif</p>

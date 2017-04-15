@@ -113,8 +113,8 @@
 
                     <div class="row">
                         <div class="col-lg-6">
-                            @if( !empty($siteConfiguration->ogpImage) )
-                                <img id="OGP-image-preview" style="max-width: 500px; width: 100%;" src="{!! $siteConfiguration->ogpImage->getThumbnailUrl(400, 157) !!}" alt="" class="margin" />
+                            @if( !empty($siteConfiguration->present()->ogpImage()) )
+                                <img id="OGP-image-preview" style="max-width: 500px; width: 100%;" src="{!! $siteConfiguration->present()->ogpImage->present()->url() !!}" alt="" class="margin" />
                             @else
                                 <img id="OGP-image-preview" style="max-width: 500px; width: 100%;" src="{!! \URLHelper::asset('img/no_image.jpg', 'common') !!}" alt="" class="margin" />
                             @endif
@@ -126,8 +126,8 @@
                             </p>
                         </div>
                         <div class="col-lg-6">
-                            @if( !empty($siteConfiguration->twitterCardImage) )
-                                <img id="twitter_card_image-preview" style="max-width: 500px; width: 100%;" src="{!! $siteConfiguration->twitterCardImage->getThumbnailUrl(400, 157) !!}" alt="" class="margin" />
+                            @if( !empty($siteConfiguration->present()->twitterCardImage()) )
+                                <img id="twitter_card_image-preview" style="max-width: 500px; width: 100%;" src="{!! $siteConfiguration->present()->twitterCardImage->present()->url() !!}" alt="" class="margin" />
                             @else
                                 <img id="twitter_card_image-preview" style="max-width: 500px; width: 100%;" src="{!! \URLHelper::asset('img/no_image.jpg', 'common') !!}" alt="" class="margin" />
                             @endif

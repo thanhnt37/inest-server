@@ -6,17 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Repositories\SiteConfigurationRepositoryInterface;
 use App\Http\Requests\Admin\SiteConfigurationRequest;
 use App\Http\Requests\PaginationRequest;
+use App\Services\FileUploadServiceInterface;
+use App\Repositories\ImageRepositoryInterface;
 
 class SiteConfigurationController extends Controller {
 
     /** @var \App\Repositories\SiteConfigurationRepositoryInterface */
     protected $siteConfigurationRepository;
 
+    /** @var FileUploadServiceInterface $fileUploadService */
+    protected $fileUploadService;
+
+    /** @var ImageRepositoryInterface $imageRepository */
+    protected $imageRepository;
 
     public function __construct(
-        SiteConfigurationRepositoryInterface $siteConfigurationRepository
+        SiteConfigurationRepositoryInterface    $siteConfigurationRepository,
+        FileUploadServiceInterface              $fileUploadService,
+        ImageRepositoryInterface                $imageRepository
     ) {
-        $this->siteConfigurationRepository = $siteConfigurationRepository;
+        $this->siteConfigurationRepository  = $siteConfigurationRepository;
+        $this->fileUploadService            = $fileUploadService;
+        $this->imageRepository              = $imageRepository;
     }
 
     /**
@@ -92,6 +103,42 @@ class SiteConfigurationController extends Controller {
                 ->withErrors( trans( 'admin.errors.general.save_failed' ) );
         }
 
+        if ($request->hasFile('ogp_image')) {
+            $file = $request->file('ogp_image');
+
+            $image = $this->fileUploadService->upload(
+                'ogp_image',
+                $file,
+                [
+                    'entity_type' => 'ogp_image',
+                    'entity_id'   => $model->id,
+                    'title'       => $request->input('title', ''),
+                ]
+            );
+
+            if (!empty($image)) {
+                $this->siteConfigurationRepository->update($model, ['ogp_image_id' => $image->id]);
+            }
+        }
+
+        if ($request->hasFile('twitter_card_image')) {
+            $file = $request->file('twitter_card_image');
+
+            $image = $this->fileUploadService->upload(
+                'twitter_card_image',
+                $file,
+                [
+                    'entity_type' => 'twitter_card_image',
+                    'entity_id'   => $model->id,
+                    'title'       => $request->input('title', ''),
+                ]
+            );
+
+            if (!empty($image)) {
+                $this->siteConfigurationRepository->update($model, ['twitter_card_image_id' => $image->id]);
+            }
+        }
+
         return redirect()
             ->action( 'Admin\SiteConfigurationController@index' )
             ->with( 'message-success', trans( 'admin.messages.general.create_success' ) );
@@ -155,6 +202,52 @@ class SiteConfigurationController extends Controller {
         );
 
         $this->siteConfigurationRepository->update( $model, $input );
+
+        if ($request->hasFile('ogp_image')) {
+            $file       = $request->file('ogp_image');
+
+            $newImage = $this->fileUploadService->upload(
+                'ogp_image',
+                $file,
+                [
+                    'entity_type' => 'ogp_image',
+                    'entity_id'   => $model->id,
+                    'title'       => $request->input('title', ''),
+                ]
+            );
+
+            if (!empty($newImage)) {
+                $oldImage = $model->coverImage;
+                if (!empty($oldImage)) {
+                    $this->fileUploadService->delete($oldImage);
+                }
+
+                $this->siteConfigurationRepository->update($model, [ 'ogp_image_id' => $newImage->id ]);
+            }
+        }
+
+        if ($request->hasFile('twitter_card_image')) {
+            $file       = $request->file('twitter_card_image');
+
+            $newImage = $this->fileUploadService->upload(
+                'twitter_card_image',
+                $file,
+                [
+                    'entity_type' => 'twitter_card_image',
+                    'entity_id'   => $model->id,
+                    'title'       => $request->input('title', ''),
+                ]
+            );
+
+            if (!empty($newImage)) {
+                $oldImage = $model->coverImage;
+                if (!empty($oldImage)) {
+                    $this->fileUploadService->delete($oldImage);
+                }
+
+                $this->siteConfigurationRepository->update($model, [ 'twitter_card_image_id' => $newImage->id ]);
+            }
+        }
 
         return redirect()
             ->action( 'Admin\SiteConfigurationController@show', [$id] )
