@@ -147,4 +147,55 @@ $factory->define(
     }
 );
 
+$factory->define(App\Models\Application::class, function (Faker\Generator $faker) {
+    return [
+        'name'         => $faker->name,
+        'bundle_id'    => $faker->creditCardNumber(),
+        'version'      => $faker->numberBetween(1, 10),
+        'introduction' => $faker->sentences(4, true),
+        'icon'         => $faker->imageUrl(100, 100),
+        'ios_url'      => $faker->url,
+        'android_url'  => $faker->url,
+        'ads_type'     => $faker->randomKey(['normal', 'video']),
+        'message_id'   => 0,
+    ];
+});
+
+$factory->define(App\Models\Message::class, function (Faker\Generator $faker) {
+    return [
+        'title'     => $faker->sentence,
+        'message'   => $faker->sentences(4, true),
+        'image_url' => $faker->imageUrl(),
+        'ok_title'  => $faker->sentence,
+        'url'       => $faker->url,
+    ];
+});
+
+$factory->define(App\Models\Device::class, function (Faker\Generator $faker) {
+    return [
+        'device_id'      => $faker->creditCardNumber(),
+        'name'           => $faker->name,
+        'model'          => $faker->word,
+        'platform'       => $faker->randomKey(['ios', 'android']),
+        'os_version'     => $faker->numberBetween(1, 10),
+        'application_id' => 0,
+        'lbh'            => $faker->boolean,
+        'mode_player'    => $faker->randomKey(['xcd', 'yt']),
+        'bg'             => $faker->boolean,
+        'ads_name'       => $faker->name,
+    ];
+});
+
+$factory->define(App\Models\Advertisement::class, function (Faker\Generator $faker) {
+    return [
+        'type'        => $faker->randomKey(['normal', 'video']),
+        'name'        => $faker->name,
+        'icon_url'    => $faker->imageUrl(100, 100),
+        'url'         => $faker->url,
+        'description' => $faker->sentences(4, true),
+        'image_url'   => $faker->imageUrl(),
+        'video_url'   => $faker->url,
+    ];
+});
+
 /* NEW MODEL FACTORY */
