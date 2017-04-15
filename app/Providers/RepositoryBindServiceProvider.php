@@ -86,6 +86,26 @@ class RepositoryBindServiceProvider extends ServiceProvider {
             \App\Repositories\Eloquent\LogRepository::class
         );
 
+        $this->app->singleton(
+            \App\Repositories\ApplicationRepositoryInterface::class,
+            \App\Repositories\Eloquent\ApplicationRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\MessageRepositoryInterface::class,
+            \App\Repositories\Eloquent\MessageRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\DeviceRepositoryInterface::class,
+            \App\Repositories\Eloquent\DeviceRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\AdvertisementRepositoryInterface::class,
+            \App\Repositories\Eloquent\AdvertisementRepository::class
+        );
+
         /* NEW BINDING */
     }
 }
