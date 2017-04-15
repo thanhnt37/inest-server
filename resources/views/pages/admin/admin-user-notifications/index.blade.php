@@ -29,9 +29,9 @@
                 <div class="col-sm-6">
                     <h3 class="box-title">
                         <p class="text-right">
-                            <a href="{!! URL::action('Admin\AdminUserNotificationController@create') !!}"
-                               class="btn btn-block btn-primary btn-sm"
-                               style="width: 125px;">@lang('admin.pages.common.buttons.create')</a>
+                            {{--<a href="{!! URL::action('Admin\AdminUserNotificationController@create') !!}"--}}
+                               {{--class="btn btn-block btn-primary btn-sm"--}}
+                               {{--style="width: 125px;">@lang('admin.pages.common.buttons.create')</a>--}}
                         </p>
                     </h3>
                     <br>
