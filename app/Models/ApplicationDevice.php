@@ -39,12 +39,12 @@ class ApplicationDevice extends Base
     }
 
     // Relations
-    public function application()
+    public function applications()
     {
         return $this->belongsTo(\App\Models\Application::class, 'application_id', 'id');
     }
 
-    public function device()
+    public function devices()
     {
         return $this->belongsTo(\App\Models\Device::class, 'device_id', 'id');
     }

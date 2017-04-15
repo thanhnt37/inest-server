@@ -51,7 +51,7 @@ class Application extends Base
     // Relations
     public function message()
     {
-        return $this->belongsTo(\App\Models\Message::class, 'message_id', 'id');
+        return $this->hasOne(\App\Models\Message::class, 'id', 'message_id');
     }
 
     public function devices()
