@@ -55,7 +55,6 @@ class Message extends Base
     public function toAPIArray()
     {
         return [
-            'id'        => $this->id,
             'title'     => $this->title,
             'message'   => $this->message,
             'image_url' => $this->image_url,

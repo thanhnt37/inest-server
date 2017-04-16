@@ -59,7 +59,6 @@ class Advertisement extends Base
     public function toAPIArray()
     {
         $array = [
-            'id'          => $this->id,
             'type'        => $this->type,
             'name'        => $this->name,
             'icon_url'    => $this->icon_url,
