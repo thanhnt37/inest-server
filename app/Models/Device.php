@@ -64,15 +64,9 @@ class Device extends Base
     public function toAPIArray()
     {
         return [
-            'id'             => $this->id,
-            'device_id'      => $this->device_id,
-            'name'           => $this->name,
-            'model'          => $this->model,
-            'platform'       => $this->platform,
-            'os_version'     => $this->os_version,
-            'lbh'            => $this->lbh,
+            'lbh'            => $this->lbh ? true : false,
             'mode_player'    => $this->mode_player,
-            'bg'             => $this->bg,
+            'bg'             => $this->bg ? true : false,
             'ads_name'       => $this->ads_name,
         ];
     }
