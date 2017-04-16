@@ -14,6 +14,7 @@ return [
         '109' => 'Error, The route is not defined !!!',
         '110' => 'Error, Method not exist !!!',
         '111' => 'Error, This email is already used !!!',
+        '112' => 'Error, App info is invalid !!!',
 
         '900' => 'Sorry, Unknown error !!!',
         '901' => 'Sorry, Can\'t working with Database !!!',

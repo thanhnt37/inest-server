@@ -7,6 +7,8 @@ class Application extends Base
 
     use SoftDeletes;
 
+    const ADS_TYPE_ALL   = 'all';
+
     /**
      * The database table used by the model.
      *

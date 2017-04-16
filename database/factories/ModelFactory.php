@@ -156,7 +156,7 @@ $factory->define(App\Models\Application::class, function (Faker\Generator $faker
         'icon'         => $faker->imageUrl(100, 100),
         'ios_url'      => $faker->url,
         'android_url'  => $faker->url,
-        'ads_type'     => $faker->randomKey(['normal', 'video']),
+        'ads_type'     => $faker->randomElement(['normal', 'video']),
         'message_id'   => 0,
     ];
 });
@@ -176,10 +176,10 @@ $factory->define(App\Models\Device::class, function (Faker\Generator $faker) {
         'device_id'   => $faker->creditCardNumber(),
         'name'        => $faker->name,
         'model'       => $faker->word,
-        'platform'    => $faker->randomKey(['ios', 'android']),
+        'platform'    => $faker->randomElement(['ios', 'android']),
         'os_version'  => $faker->numberBetween(1, 10),
         'lbh'         => $faker->boolean,
-        'mode_player' => $faker->randomKey(['xcd', 'yt']),
+        'mode_player' => $faker->randomElement(['xcd', 'yt']),
         'bg'          => $faker->boolean,
         'ads_name'    => $faker->name,
     ];
@@ -187,7 +187,7 @@ $factory->define(App\Models\Device::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Models\Advertisement::class, function (Faker\Generator $faker) {
     return [
-        'type'        => $faker->randomKey(['normal', 'video']),
+        'type'        => $faker->randomElement(['normal', 'video']),
         'name'        => $faker->name,
         'icon_url'    => $faker->imageUrl(100, 100),
         'url'         => $faker->url,

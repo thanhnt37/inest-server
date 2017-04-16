@@ -4,8 +4,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Advertisement extends Base
 {
-
     use SoftDeletes;
+
+    const ADS_TYPE_VIDEO    = 'video';
+    const ADS_TYPE_NORMAL   = 'normal';
 
     /**
      * The database table used by the model.
@@ -56,16 +58,21 @@ class Advertisement extends Base
      */
     public function toAPIArray()
     {
-        return [
+        $array = [
             'id'          => $this->id,
             'type'        => $this->type,
             'name'        => $this->name,
             'icon_url'    => $this->icon_url,
             'url'         => $this->url,
             'description' => $this->description,
-            'image_url'   => $this->image_url,
-            'video_url'   => $this->video_url,
         ];
+
+        if( $this->type == Advertisement::ADS_TYPE_VIDEO ) {
+            $array['image_url'] = $this->image_url;
+            $array['video_url'] = $this->video_url;
+        }
+
+        return $array;
     }
 
 }

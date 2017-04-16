@@ -12,6 +12,12 @@
             \Route::post('forgot-password', 'API\V1\PasswordController@forgotPassword');
 
             \Route::post('signup', 'API\V1\AuthController@signUp');
+
+
+            \Route::post('/ads/interstitial', 'API\V1\ApplicationController@interstitial');
+            \Route::post('/offers', 'API\V1\ApplicationController@offers');
+            \Route::post('/messagebox', 'API\V1\ApplicationController@messagebox');
+            \Route::post('/checkmode', 'API\V1\ApplicationController@checkmode');
         });
 
     });
