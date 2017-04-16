@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'menu'     => [
+    'menu'       => [
         'dashboard'                => 'Dashboard',
         'admin_users'              => 'Admin Users',
         'users'                    => 'Users',
@@ -24,14 +24,14 @@ return [
         'articles'                 => 'Articles',
         'create_new'               => 'Create New',
     ],
-    'messages' => [
+    'messages'   => [
         'general' => [
             'update_success' => 'Successfully updated.',
             'create_success' => 'Successfully created.',
             'delete_success' => 'Successfully deleted.',
         ],
     ],
-    'errors'   => [
+    'errors'     => [
         'general'  => [
             'save_failed' => 'Failed To Save. Please contact with developers',
         ],
@@ -47,19 +47,20 @@ return [
             ],
         ],
     ],
-    'pages'    => [
+    'pages'      => [
         'common'                   => [
             'label'   => [
-                'page'             => 'Page',
-                'actions'          => 'Actions',
-                'is_enabled'       => 'Status',
-                'is_enabled_true'  => 'Enabled',
-                'is_enabled_false' => 'Disabled',
-                'search_results'   => 'Total: :count results',
-                'select_province'  => 'Select a Province',
-                'select_district'  => 'Select a District',
-                'select_locale'    => 'Select a Locale',
-                'select_category'  => 'Select a Category',
+                'page'               => 'Page',
+                'actions'            => 'Actions',
+                'is_enabled'         => 'Status',
+                'is_enabled_true'    => 'Enabled',
+                'is_enabled_false'   => 'Disabled',
+                'search_results'     => 'Total: :count results',
+                'select_province'    => 'Select a Province',
+                'select_district'    => 'Select a District',
+                'select_locale'      => 'Select a Locale',
+                'select_category'    => 'Select a Category',
+                'select_application' => 'Select a Application',
             ],
             'buttons' => [
                 'create'          => 'Create New',
@@ -210,9 +211,19 @@ return [
                 'query'     => 'Query',
             ],
         ],
+        'messages'                 => [
+            'columns' => [
+                'application_id' => 'Application',
+                'title'          => 'Title',
+                'message'        => 'Message',
+                'image_url'      => 'Image URL',
+                'ok_title'       => 'OK Title',
+                'url'            => 'URL',
+            ],
+        ],
         /* NEW PAGE STRINGS */
     ],
-    'roles'    => [
+    'roles'      => [
         'super_user' => 'Super User',
         'admin'      => 'Administrator',
     ],

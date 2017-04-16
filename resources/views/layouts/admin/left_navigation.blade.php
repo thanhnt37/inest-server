@@ -41,6 +41,7 @@
                 {{--<li @if( $menu=='images') class="active" @endif ><a href="{!! \URL::action('Admin\ImageController@index') !!}"><i class="fa fa-file-image-o"></i> <span>@lang('admin.menu.images')</span></a></li>--}}
                 {{--<li @if( $menu=='articles') class="active" @endif ><a href="{!! \URL::action('Admin\ArticleController@index') !!}"><i class="fa fa-file-word-o"></i> <span>@lang('admin.menu.articles')</span></a></li>--}}
             @endif
+            <li @if( $menu=='messages') class="active" @endif ><a href="{!! \URL::action('Admin\MessageController@index') !!}"><i class="fa fa-users"></i> <span>Messages</span></a></li>
             <!-- %%SIDEMENU%% -->
         </ul>
     </section>

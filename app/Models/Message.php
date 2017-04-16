@@ -45,6 +45,10 @@ class Message extends Base
     }
 
     // Relations
+    public function applications()
+    {
+        return $this->hasMany(\App\Models\Application::class, 'message_id', 'id');
+    }
 
 
     // Utility Functions
