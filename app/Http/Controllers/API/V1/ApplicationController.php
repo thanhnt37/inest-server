@@ -103,6 +103,49 @@ class ApplicationController extends Controller
 
     public function offers(APIRequest $request)
     {
+        $data = $request->all();
+        $paramsAllow = [
+            'string'   => [
+                'device_id',
+                'device_name',
+                'device_model',
+                'os_version',
+                'app_id',
+                'app_bundle_id',
+                'app_version',
+            ],
+            'enum'     => [
+                'platform' => ['ios', 'android', 'window_phone']
+            ]
+        ];
+        $paramsRequire = ['device_id', 'device_model', 'app_id', 'app_bundle_id'];
+        $validate = $request->checkParams($data, $paramsAllow, $paramsRequire);
+        if ($validate['code'] != 100) {
+            return $this->response($validate['code']);
+        }
+        $data = $validate['data'];
+
+        $device = $this->deviceRepository->findByDeviceId($data['device_id']);
+        if( empty($device) ) {
+            return $this->response(902);
+        }
+
+        $application = $this->applicationRepository->find($data['app_id']);
+        if( empty($application) || ($application['bundle_id'] != $data['app_bundle_id']) ) {
+            return $this->response(112);
+        }
+
+        $this->applicationService->updateAppForDevice($device, $data['app_id'], $data['app_bundle_id']);
+
+        $ads = $this->advertisementRepository->allByType(Advertisement::ADS_TYPE_NORMAL);
+
+        if( !count($ads) ) {
+            return $this->response(902);
+        }
+
+        $randomAd = $ads[rand(0, count($ads) - 1)];
+
+        return $this->response(100, $randomAd->toAPIArray());
     }
 
     public function messagebox(APIRequest $request)
