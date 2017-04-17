@@ -7,6 +7,9 @@ class Device extends Base
 
     use SoftDeletes;
 
+    const TYPE_MODE_PLAYER_YT   = 'yt';
+    const TYPE_MODE_PLAYER_XCD  = 'xcd';
+
     /**
      * The database table used by the model.
      *

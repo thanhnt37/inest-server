@@ -67,8 +67,7 @@ class AdvertisementController extends Controller
     public function store(AdvertisementRequest $request)
     {
         $input = $request->only(['type','name','icon_url','url','description','image_url','video_url']);
-        
-        $input['is_enabled'] = $request->get('is_enabled', 0);
+
         $advertisement = $this->advertisementRepository->create($input);
 
         if (empty( $advertisement )) {
@@ -124,8 +123,7 @@ class AdvertisementController extends Controller
             abort(404);
         }
         $input = $request->only(['type','name','icon_url','url','description','image_url','video_url']);
-        
-        $input['is_enabled'] = $request->get('is_enabled', 0);
+
         $this->advertisementRepository->update($advertisement, $input);
 
         return redirect()->action('Admin\AdvertisementController@show', [$id])

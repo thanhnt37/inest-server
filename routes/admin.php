@@ -49,6 +49,7 @@
 
         \Route::resource('messages', 'Admin\MessageController');
         \Route::resource('advertisements', 'Admin\AdvertisementController');
+        \Route::resource('devices', 'Admin\DeviceController');
         /* NEW ADMIN RESOURCE ROUTE */
 
     });

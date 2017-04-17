@@ -43,6 +43,7 @@
             @endif
             <li @if( $menu=='messages') class="active" @endif ><a href="{!! \URL::action('Admin\MessageController@index') !!}"><i class="fa fa-users"></i> <span>Messages</span></a></li>
             <li @if( $menu=='advertisements') class="active" @endif ><a href="{!! \URL::action('Admin\AdvertisementController@index') !!}"><i class="fa fa-users"></i> <span>Advertisements</span></a></li>
+            <li @if( $menu=='devices') class="active" @endif ><a href="{!! \URL::action('Admin\DeviceController@index') !!}"><i class="fa fa-users"></i> <span>Devices</span></a></li>
             <!-- %%SIDEMENU%% -->
         </ul>
     </section>

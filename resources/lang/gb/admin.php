@@ -232,6 +232,19 @@ return [
                 'video_url'   => 'Video URL',
             ],
         ],
+        'devices'                  => [
+            'columns' => [
+                'device_id'   => 'Device ID',
+                'name'        => 'Name',
+                'model'       => 'Model',
+                'platform'    => 'Platform',
+                'os_version'  => 'OS Version',
+                'lbh'         => 'LBH',
+                'mode_player' => 'Mode Player',
+                'bg'          => 'BG',
+                'ads_name'    => 'Ads Name',
+            ],
+        ],
         /* NEW PAGE STRINGS */
     ],
     'roles'      => [
