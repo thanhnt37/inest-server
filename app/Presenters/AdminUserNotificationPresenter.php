@@ -2,6 +2,8 @@
 
 namespace App\Presenters;
 
+use Illuminate\Support\Facades\Redis;
+
 class AdminUserNotificationPresenter extends BasePresenter
 {
     protected $multilingualFields = [];

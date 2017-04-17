@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use App\Models\Application;
 use App\Models\Device;
+use Illuminate\Support\Facades\Redis;
 
 class ApplicationDevicePresenter extends BasePresenter
 {
