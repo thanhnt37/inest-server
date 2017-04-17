@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\ApplicationRepositoryInterface;
 use App\Http\Requests\Admin\ApplicationRequest;
 use App\Http\Requests\PaginationRequest;
+use App\Repositories\MessageRepositoryInterface;
 
 class ApplicationController extends Controller
 {
@@ -13,12 +14,17 @@ class ApplicationController extends Controller
     /** @var \App\Repositories\ApplicationRepositoryInterface */
     protected $applicationRepository;
 
+    /** @var \App\Repositories\MessageRepositoryInterface */
+    protected $messageRepository;
+
 
     public function __construct(
-        ApplicationRepositoryInterface $applicationRepository
+        ApplicationRepositoryInterface  $applicationRepository,
+        MessageRepositoryInterface      $messageRepository
     )
     {
-        $this->applicationRepository = $applicationRepository;
+        $this->applicationRepository    = $applicationRepository;
+        $this->messageRepository        = $messageRepository;
     }
 
     /**
@@ -66,7 +72,7 @@ class ApplicationController extends Controller
      */
     public function store(ApplicationRequest $request)
     {
-        $input = $request->only(['name','version','introduction','icon','ios_url','android_url','ads_type']);
+        $input = $request->only(['name', 'bundle_id', 'version','introduction','icon','ios_url','android_url','ads_type']);
 
         $application = $this->applicationRepository->create($input);
 
@@ -122,9 +128,23 @@ class ApplicationController extends Controller
         if (empty( $application )) {
             abort(404);
         }
-        $input = $request->only(['name','version','introduction','icon','ios_url','android_url','ads_type']);
+        $input = $request->only(['name', 'bundle_id', 'version','introduction','icon','ios_url','android_url','ads_type']);
         
         $this->applicationRepository->update($application, $input);
+
+        if( count($request->get('message', [])) ) {
+            if( empty($application->message) ) {
+                $message = $this->messageRepository->create($request->get('message'));
+
+                $this->applicationRepository->update($application,
+                    [
+                        'message_id' => $message->id
+                    ]
+                );
+            } else {
+                $this->messageRepository->update($application->message, $request->get('message'));
+            }
+        }
 
         return redirect()->action('Admin\ApplicationController@show', [$id])
                     ->with('message-success', trans('admin.messages.general.update_success'));

@@ -63,7 +63,7 @@
                     <div class="col-md-6">
                         <div class="form-group @if ($errors->has('title')) has-error @endif">
                             <label for="title">@lang('admin.pages.messages.columns.title')</label>
-                            <input type="text" class="form-control" id="title" name="title"
+                            <input type="text" class="form-control" id="title" name="title" required
                                    value="{{ old('title') ? old('title') : $message->title }}">
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                     <div class="col-md-6">
                         <div class="form-group @if ($errors->has('ok_title')) has-error @endif">
                             <label for="ok_title">@lang('admin.pages.messages.columns.ok_title')</label>
-                            <input type="text" class="form-control" id="ok_title" name="ok_title"
+                            <input type="text" class="form-control" id="ok_title" name="ok_title" required
                                    value="{{ old('ok_title') ? old('ok_title') : $message->ok_title }}">
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                     <div class="col-md-12">
                         <div class="form-group @if ($errors->has('image_url')) has-error @endif">
                             <label for="image_url">@lang('admin.pages.messages.columns.image_url')</label>
-                            <input type="text" class="form-control" id="image_url" name="image_url"
+                            <input type="text" class="form-control" id="image_url" name="image_url" required
                                    value="{{ old('image_url') ? old('image_url') : $message->image_url }}">
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                     <div class="col-md-12">
                         <div class="form-group @if ($errors->has('url')) has-error @endif">
                             <label for="url">@lang('admin.pages.messages.columns.url')</label>
-                            <input type="text" class="form-control" id="url" name="url"
+                            <input type="text" class="form-control" id="url" name="url" required
                                    value="{{ old('url') ? old('url') : $message->url }}">
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                     <div class="col-md-12">
                         <div class="form-group @if ($errors->has('message')) has-error @endif">
                             <label for="message">@lang('admin.pages.messages.columns.message')</label>
-                            <textarea name="message" class="form-control" rows="5"
+                            <textarea name="message" class="form-control" rows="5" required
                                       placeholder="@lang('admin.pages.messages.columns.message')">{{ old('message') ? old('message') : $message->message }}</textarea>
                         </div>
                     </div>

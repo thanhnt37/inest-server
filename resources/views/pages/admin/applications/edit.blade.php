@@ -131,6 +131,63 @@
                     </div>
                 </div>
 
+                @if( !$isNew )
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                Message
+                            </h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="title">@lang('admin.pages.messages.columns.title')</label>
+                                            <input type="text" class="form-control" id="message_title" name="message[title]" required value="{{ old('message[title]') ? old('message[title]') : !empty($application->present()->message()) ? $application->present()->message()->title : '' }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group @if ($errors->has('ok_title')) has-error @endif">
+                                            <label for="ok_title">@lang('admin.pages.messages.columns.ok_title')</label>
+                                            <input type="text" class="form-control" id="message_ok_title" name="message[ok_title]" required value="{{ old('ok_title') ? old('ok_title') : !empty($application->present()->message()) ? $application->present()->message()->ok_title: '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group @if ($errors->has('image_url')) has-error @endif">
+                                            <label for="image_url">@lang('admin.pages.messages.columns.image_url')</label>
+                                            <input type="text" class="form-control" id="message_image_url" name="message[image_url]" required value="{{ old('message[image_url]') ? old('message[image_url]') : !empty($application->present()->message()) ? $application->present()->message()->image_url : '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group @if ($errors->has('url')) has-error @endif">
+                                            <label for="url">@lang('admin.pages.messages.columns.url')</label>
+                                            <input type="text" class="form-control" id="message_url" name="message[url]" required value="{{ old('message[url]') ? old('message[url]') : !empty($application->present()->message()) ? $application->present()->message()->url : '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group @if ($errors->has('message')) has-error @endif">
+                                            <label for="message">@lang('admin.pages.messages.columns.message')</label>
+                                            <textarea name="message[message]" required class="form-control" rows="5" placeholder="@lang('admin.pages.messages.columns.message')">{{ old('message[message]') ? old('message[message]') : !empty($application->present()->message()) ? $application->present()->message()->message : '' }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
             </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-primary btn-sm" style="width: 125px;">@lang('admin.pages.common.buttons.save')</button>
