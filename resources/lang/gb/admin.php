@@ -221,6 +221,17 @@ return [
                 'url'            => 'URL',
             ],
         ],
+        'advertisements'           => [
+            'columns' => [
+                'type'        => 'Type',
+                'name'        => 'Name',
+                'icon_url'    => 'Icon URL',
+                'url'         => 'Url',
+                'description' => 'Description',
+                'image_url'   => 'Image URL',
+                'video_url'   => 'Video URL',
+            ],
+        ],
         /* NEW PAGE STRINGS */
     ],
     'roles'      => [

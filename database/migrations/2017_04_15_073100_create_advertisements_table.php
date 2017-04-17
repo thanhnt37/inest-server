@@ -19,7 +19,8 @@ class CreateadvertisementsTable extends Migration
             $table->string('name');
             $table->string('icon_url');
             $table->string('url');
-            $table->string('description');
+            
+            $table->text('description');
 
             $table->string('image_url')->nullable();
             $table->string('video_url')->nullable();

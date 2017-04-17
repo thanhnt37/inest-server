@@ -48,6 +48,7 @@
         \Route::post('signout', 'Admin\AuthController@postSignOut');
 
         \Route::resource('messages', 'Admin\MessageController');
+        \Route::resource('advertisements', 'Admin\AdvertisementController');
         /* NEW ADMIN RESOURCE ROUTE */
 
     });
