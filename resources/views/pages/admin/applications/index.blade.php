@@ -4,6 +4,11 @@
 @stop
 
 @section('styles')
+    <style>
+        table tr td:nth-child(4) img {
+            max-width: 100px;
+        }
+    </style>
 @stop
 
 @section('scripts')
@@ -51,6 +56,7 @@ Applications
                 <th>{!! \PaginationHelper::sort('icon', trans('admin.pages.applications.columns.icon')) !!}</th>
                 <th>{!! \PaginationHelper::sort('ios_url', trans('admin.pages.applications.columns.ios_url')) !!}</th>
                 <th>{!! \PaginationHelper::sort('android_url', trans('admin.pages.applications.columns.android_url')) !!}</th>
+                <th>{!! \PaginationHelper::sort('ads_type', trans('admin.pages.applications.columns.total_device')) !!}</th>
                 <th>{!! \PaginationHelper::sort('ads_type', trans('admin.pages.applications.columns.ads_type')) !!}</th>
 
                 <th style="width: 40px">@lang('admin.pages.common.label.actions')</th>
@@ -60,9 +66,10 @@ Applications
                     <td>{{ $application->id }}</td>
                     <td>{{ $application->name }}</td>
                     <td>{{ $application->bundle_id }}</td>
-                    <td>{{ $application->icon }}</td>
+                    <td><img src="{{ $application->icon }}" alt=""></td>
                     <td>{{ $application->ios_url }}</td>
                     <td>{{ $application->android_url }}</td>
+                    <td>{{ count($application->devices) }}</td>
                     <td>{{ $application->ads_type }}</td>
 
                     <td>

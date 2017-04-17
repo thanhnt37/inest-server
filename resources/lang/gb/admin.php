@@ -254,6 +254,7 @@ return [
                 'icon'         => 'Icon URL',
                 'ios_url'      => 'Ios URL',
                 'android_url'  => 'Android URL',
+                'total_device' => 'Total Device',
                 'ads_type'     => 'Ads Type',
                 'message_id'   => 'Message',
             ],

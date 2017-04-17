@@ -86,7 +86,7 @@
                     <div class="col-md-6">
                         <div class="form-group @if ($errors->has('ads_type')) has-error @endif">
                             <label for="ads_type">@lang('admin.pages.applications.columns.ads_type')</label>
-                            <select class="form-control" name="type" id="type" required>
+                            <select class="form-control" name="ads_type" id="ads_type" required>
                                 <option @if( (old('ads_type') && old('ads_type') == \App\Models\Application::ADS_TYPE_ALL) || ( $application->ads_type === \App\Models\Application::ADS_TYPE_ALL) ) selected @endif  value="{{\App\Models\Application::ADS_TYPE_ALL}}">All</option>
                                 <option @if( (old('ads_type') && old('ads_type') == \App\Models\Advertisement::ADS_TYPE_NORMAL) || ( $application->ads_type === \App\Models\Advertisement::ADS_TYPE_NORMAL) ) selected @endif  value="{{\App\Models\Advertisement::ADS_TYPE_NORMAL}}">Normal</option>
                                 <option @if( (old('ads_type') && old('ads_type') == \App\Models\Advertisement::ADS_TYPE_VIDEO) || ( $application->ads_type === \App\Models\Advertisement::ADS_TYPE_VIDEO) ) selected @endif  value="{{\App\Models\Advertisement::ADS_TYPE_VIDEO}}">Video</option>

@@ -4,6 +4,11 @@
 @stop
 
 @section('styles')
+    <style>
+        table tr td:nth-child(3) img {
+            max-width: 250px;
+        }
+    </style>
 @stop
 
 @section('scripts')
@@ -57,7 +62,7 @@
                 <tr>
                     <td>{{ $message->id }}</td>
                     <td>{{ $message->title }}</td>
-                    <td>{{ $message->image_url }}</td>
+                    <td><img src="{{ $message->image_url }}" alt=""></td>
                     <td>{{ $message->ok_title }}</td>
                     <td>{{ $message->url }}</td>
 

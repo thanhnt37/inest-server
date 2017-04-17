@@ -4,6 +4,11 @@
 @stop
 
 @section('styles')
+    <style>
+        table tr td:nth-child(4) img {
+            max-width: 200px;
+        }
+    </style>
 @stop
 
 @section('scripts')
@@ -58,7 +63,7 @@ Advertisements
                     <td>{{ $advertisement->id }}</td>
                     <td>{{ $advertisement->type }}</td>
                     <td>{{ $advertisement->name }}</td>
-                    <td>{{ $advertisement->icon_url }}</td>
+                    <td><img src="{{$advertisement->icon_url}}" alt=""></td>
                     <td>{{ $advertisement->url }}</td>
 
                     <td>
