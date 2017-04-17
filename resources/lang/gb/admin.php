@@ -245,6 +245,19 @@ return [
                 'ads_name'    => 'Ads Name',
             ],
         ],
+        'applications'             => [
+            'columns' => [
+                'name'         => 'Name',
+                'bundle_id'    => 'Bundle ID',
+                'version'      => 'Version',
+                'introduction' => 'Introduction',
+                'icon'         => 'Icon URL',
+                'ios_url'      => 'Ios URL',
+                'android_url'  => 'Android URL',
+                'ads_type'     => 'Ads Type',
+                'message_id'   => 'Message',
+            ],
+        ],
         /* NEW PAGE STRINGS */
     ],
     'roles'      => [

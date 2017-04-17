@@ -41,9 +41,10 @@
                 {{--<li @if( $menu=='images') class="active" @endif ><a href="{!! \URL::action('Admin\ImageController@index') !!}"><i class="fa fa-file-image-o"></i> <span>@lang('admin.menu.images')</span></a></li>--}}
                 {{--<li @if( $menu=='articles') class="active" @endif ><a href="{!! \URL::action('Admin\ArticleController@index') !!}"><i class="fa fa-file-word-o"></i> <span>@lang('admin.menu.articles')</span></a></li>--}}
             @endif
-            <li @if( $menu=='messages') class="active" @endif ><a href="{!! \URL::action('Admin\MessageController@index') !!}"><i class="fa fa-users"></i> <span>Messages</span></a></li>
-            <li @if( $menu=='advertisements') class="active" @endif ><a href="{!! \URL::action('Admin\AdvertisementController@index') !!}"><i class="fa fa-users"></i> <span>Advertisements</span></a></li>
-            <li @if( $menu=='devices') class="active" @endif ><a href="{!! \URL::action('Admin\DeviceController@index') !!}"><i class="fa fa-users"></i> <span>Devices</span></a></li>
+            <li @if( $menu=='applications') class="active" @endif ><a href="{!! \URL::action('Admin\ApplicationController@index') !!}"><i class="fa fa-server" ></i> <span>Applications</span></a></li>
+            <li @if( $menu=='devices') class="active" @endif ><a href="{!! \URL::action('Admin\DeviceController@index') !!}"><i class="fa fa-tablet" ></i> <span>Devices</span></a></li>
+            <li @if( $menu=='messages') class="active" @endif ><a href="{!! \URL::action('Admin\MessageController@index') !!}"><i class="fa fa-commenting-o" ></i> <span>Messages</span></a></li>
+            <li @if( $menu=='advertisements') class="active" @endif ><a href="{!! \URL::action('Admin\AdvertisementController@index') !!}"><i class="fa fa-address-card-o" ></i> <span>Advertisements</span></a></li>
             <!-- %%SIDEMENU%% -->
         </ul>
     </section>

@@ -18,7 +18,7 @@ class CreateapplicationsTable extends Migration
             $table->string('name');
             $table->string('bundle_id');
             $table->string('version');
-            $table->string('introduction');
+            $table->text('introduction');
             $table->string('icon');
             $table->string('ios_url');
             $table->string('android_url');
